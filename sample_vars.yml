@@ -1,0 +1,84 @@
+# fill in these variables to use goldenseal.yml to build a CentOS 7 ec2 instance with ansible
+#
+# public ec2-specific variables
+ec2_region: us-east-1
+ec2_zone: us-east-1d
+ec2_instance_type: m3.xlarge # default is m3.medium, a moderate instance size
+ec2_image: ami-116d857a # Debian Jessie
+ec2_vol_1: "{{ hostvars['localhost'].ec2_vol }}"
+opt_volume: /dev/xvdf
+data_volume: /dev/xvdg
+volumes_to_mount: 
+    data_device_opt: /dev/xvdf
+#
+# private ec2-specific variables
+# you can also pass these to Ansible on the command line
+# with --extra vars "var1=content1 var2=content2"
+ec2_secret_key: 
+# NO default - the Secret Key from your IAM credentials - a random string
+ec2_access_key: 
+# NO default - the Secret Access Key from your IAM credentials - starts with AKIA
+ec2_key: sandbox
+# NO default - the key from EC2 that will authenticate your ssh connection
+ec2_security_group:
+# NO default - looks like sg-xxxxxxx - the security group your instance will start in
+vpc_subnet_id:
+#
+# project-specific variables
+project_name: heliotrope
+repo: https://github.com/curationexperts/heliotrope.git
+rails_env: production
+server_name: press.curationexperts.com # FQDN, for example: wustl.curationexperts.com; default is 127.0.0.1
+install_path: /opt/install
+#
+# capistrano variables
+deploy_user: deploy
+deploy_group: deploy
+#
+# hydra variables
+OS: debian
+java_home: /usr/lib/jvm/java-8-openjdk-amd64
+solr_context: solr
+base_path: /prod
+solr_version: 5.5.0
+solr_main_version: 5
+#
+# database variables
+db: mysql2
+db_pass: blue4books
+hydra_db: m0n0graph
+hydra_db_user: br3ntano # name of the Postgresql user for the Rails app
+hydra_db_pass: 5thavenue # password for the Postgresql user for the Rails app
+#
+# fits variables
+fits_url: http://projects.iq.harvard.edu/files/fits/files/fits-{{ fits_version }}.zip 
+### for fits version 0.6.2 use https://fits.googlecode.com/files/fits-0.6.2.zip
+# fits_version: 0.8.4
+fits_version: 0.10.2
+#
+fedora_version: 4.5.0
+fedora_256: 4431ead0e2b4897e7921e7f471a869b9d749e93b
+# passenger variables
+passenger_ver: 5.0.26
+ruby_ver: 2.3.0
+ruby_sha_256: ba5ba60e5f1aa21b4ef8e9bf35b9ddb57286cb546aac4b5a28c71f459467e507 #
+ruby_gzip_url: http://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.0.tar.gz
+#
+# ldap variables - used to create ldap.yml for authentication
+# ldap_attribute: uid
+# ldap_base: ou=people,dc=dce,dc=com
+# ldap_group_base: ou=groups,dc=dce,dc=com
+# ldap_host: ldap.curationexperts.com
+# ldap_port: 389
+# ldap_admin_user: cn=admin,dc=dce,dc=com
+# ldap_admin_password: sl@pm3n0w
+# ldap_ssl: false
+#
+# smtp variables - used to create smtp.yml for email notifications
+#smtp_pass: 'Cur87ion@Xp3rtz#'
+#smtp_user: 'systems@curationexperts.com,'
+#
+# other variables
+rails_secret_key_base: 39eace7d6f244188531fc584e1eb0c7ca8fdc25ee2c4c9a4f53e151c72e3dab564231777654840cf192b2e0fd24f4fd078ae71bad7e4f0837423108db73fafa6
+# replace this with a secure key
+# insecure default is 65f1614f364760007cb2c98610b4e7d8cc3e89ad5fce5a8742197c0ba9fa1972c2b2bbfb67837b4a8eef4a13ba315556ab706ee2cbd5db645a44c8799ae96332
