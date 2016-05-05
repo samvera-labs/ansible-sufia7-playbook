@@ -1,10 +1,16 @@
-Builds a production-style Hydra head on an Ubuntu 14.04 Amazon EC2 instance or a vagrant box.
+Automates building a Hydra head on an Ubuntu 14.04 (Trusty) Debian 8.4 (Jessie), on an Amazon EC2 instance or a vagrant box.
 
 ## Prerequisites
-[Ansible](http://docs.ansible.com/intro_installation.html) 1.9 or above.
+[Ansible](http://docs.ansible.com/intro_installation.html) 2.0 or above.
+
+## Sample [Playbooks](http://docs.ansible.com/ansible/playbooks.html)
+The sample playbooks show some of the ways you can combine the [roles](http://docs.ansible.com/ansible/playbooks_roles.html#roles) to create various types of Hydra servers.
+
+## External Roles
+This project uses roles from Ansible Galaxy - see external_roles.yml. To install the external roles, run: `ansible-galaxy install -r external_roles.yml`.
 
 ## AWS / EC2 setup
-Step-by-step instructions were presented in our 2015 Hydra Connect talk: [Deploying Hydra with Ansible and AWS](https://wiki.duraspace.org/download/attachments/67241821/Deploying%20Hydra%20with%20Ansible%20and%20AWS%281%29.pdf?version=1&modificationDate=1443113768038&api=v2) -- The presentation is image-heavy and the [accompanying notes](https://wiki.duraspace.org/download/attachments/67241821/DevOpsHydraConnectDeployingHydrawithAnsibleandAWS.pdf?version=1&modificationDate=1449085395026&api=v2) provide more detail.
+Step-by-step instructions were presented in a 2015 Hydra Connect talk: [Deploying Hydra with Ansible and AWS](https://wiki.duraspace.org/download/attachments/67241821/Deploying%20Hydra%20with%20Ansible%20and%20AWS%281%29.pdf?version=1&modificationDate=1443113768038&api=v2) -- The presentation is image-heavy and the [accompanying notes](https://wiki.duraspace.org/download/attachments/67241821/DevOpsHydraConnectDeployingHydrawithAnsibleandAWS.pdf?version=1&modificationDate=1449085395026&api=v2) provide more detail.
 
 ## Execution
 To create, set up an ec2 instance:
@@ -21,7 +27,7 @@ To create, set up an ec2 instance:
 There's another playbook called configure.yml. It's included by create_ec2 but can also be run separately. This playbook IS idempotent, so it can be used to change configuration at will. Also, AWS-related tasks have been removed (let us know if you run into anything!) so it should be more generalizable. Note that to run this playbook you must specify a hosts variable (see comment in configure.yml).
 
 ## Deployment
-This project expects your code to be deployed with [Capistrano](http://capistranorb.com/). In your Hydra head (the codebase you're deploying), configure Capistrano for your server(s). In `config/deploy.rb` and/or in `config/deploy/<yourenv>.rb` you must:  
+The capistrano, hydra-stack/configure, sufia-dependencies/configure, and webserver/configure roles prepare your server for deployment with  [Capistrano](http://capistranorb.com/). If you're using Capistrano,  configure it for your server(s) in your Hydra head (the codebase you're deploying). In `config/deploy.rb` and/or in `config/deploy/<yourenv>.rb` you must:  
 	* share the log directory by including `log` in your Capistrano `linked_dirs` list and  
 	* set the Capistrano `:deploy_to` directory to match the capistrano_setup role's `project_base` variable. If you use the default value for `project_base` in the capistrano_setup role, you should use 
 ```
@@ -42,7 +48,7 @@ To set up a production-like Vagrant box (for staging, troubleshooting) for your 
  * Add/change any other variables you wish to override.
  * Consider protecting group_vars/all with ansible-vault.
 4. cd into your project and run `vagrant up`
-5. TODO: deploy your capistrano project to your vagrant box. Haven't tried this yet.
+5. the deploy role will deploy your capistrano project to your vagrant box
 
 ### A development vagrant box
 
@@ -64,7 +70,7 @@ To set up a production-like Vagrant box (for staging, troubleshooting) for your 
 8. sudo service apache2 restart
 
 ## Contributing
-Contributions are welcome in the form of issues (including bug reports, use cases) and pull requests.
+Contributions are welcome in the form of issues (including bug reports, use cases) and pull requests. See [contributing](CONTRIBUTING.md) for more details.
 
 ## Origins
-This Ansible project was created by Data Curation Experts for the Chemical Heritage Foundation.
+This Ansible project grew out of a set of playbooks and roles created by Data Curation Experts for the Chemical Heritage Foundation.
