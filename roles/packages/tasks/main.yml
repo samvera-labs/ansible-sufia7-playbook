@@ -4,6 +4,9 @@
 #
 # updates apt, installs packages used by other installation/configuration tasks
 #
+- name: Add the OS specific variables
+  include_vars: "{{ ansible_os_family }}.yml"
+
 - name: update apt cache
   become: yes
   package: update_cache=yes
@@ -19,34 +22,5 @@
 
 - name: install dev tools and libraries
   become: yes
-  package: name={{ item }} state=installed
-  with_items:
-    - build-essential
-    - git
-    - git-core
-    - curl
-    - openssl
-    - libreadline6
-    - libreadline6-dev
-    - zlib1g
-    - zlib1g-dev
-    - libssl-dev
-    - libyaml-dev
-    - libxml2-dev
-    - libxslt-dev
-    - autoconf
-    - libc6-dev
-    - ncurses-dev
-    - automake
-    - libtool
-    - bison
-    - subversion
-    - pkg-config
-    - libmagickwand-dev
-    - imagemagick
-    - libcurl4-openssl-dev
-    - libxvidcore-dev
-    - redis-server
-    - xfsprogs
-    - libsqlite3-dev
-    - libreoffice
+  package: name={{ item }} state=latest
+  with_items: "{{ dev_tools_and_libs }}"

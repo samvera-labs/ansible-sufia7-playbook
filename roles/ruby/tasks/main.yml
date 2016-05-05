@@ -13,7 +13,7 @@
 
 - name: remove package ruby
   become: yes
-  package: name=ruby state=absent
+  package: name={{ ruby_package }} state=absent
 
 - name: download ruby
   become: yes

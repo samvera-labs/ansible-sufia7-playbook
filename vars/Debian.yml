@@ -1,0 +1,90 @@
+---
+mysql_pkgs:
+  - python-selinux
+  - mysql-server
+  - python-mysqldb
+
+mysql_service: mysql
+mysql_conf_dir: "/etc/mysql/"
+
+ff_mpeg_pkgs:
+  - autoconf
+  - automake
+  - cmake
+  - gcc
+  - git
+  - libtool
+  - make
+  - mercurial
+  - nasm
+  # - freetype-devel
+  # - gcc-c++
+  # - pkgconfig
+  # - zlib-devel
+
+ff_mpeg: ffmpeg
+tomcat: tomcat8
+image_magick_pkgs:
+  # The commented out packages don't appear to exist in Ubuntu repos
+  # - fontconfig-devel
+  # - freetype-devel
+  # - libtool-ltdl-devel
+  # - libpng-devel
+  - autoconf # already present
+  - automake # already present
+  - cmake # missing - move this to prerequisites?
+  - gcc # exists
+  # - gcc-c++ 
+  - libtool #exists
+  - make #exists
+  - mercurial # what is this required for
+  # - pkgconfig 
+  # - zlib-devel
+  
+imagemagick: imagemagick
+software-properties-common: software-properties-common
+openjdk-8-jdk: openjdk-8-jdk
+
+ruby_package: "ruby"
+
+dev_tools_and_libs:
+    - build-essential
+    - git
+    - git-core
+    - curl
+    - openssl
+    - libreadline6
+    - libreadline6-dev
+    - zlib1g
+    - zlib1g-dev
+    - libssl-dev
+    - libyaml-dev
+    - libxml2-dev
+    - libxslt-dev
+    - autoconf
+    - libc6-dev
+    - ncurses-dev
+    - automake
+    - libtool
+    - bison
+    - subversion
+    - pkg-config
+    - libmagickwand-dev
+    - imagemagick
+    - libcurl4-openssl-dev
+    - libxvidcore-dev
+    - redis-server
+    - xfsprogs
+    - libsqlite3-dev
+    - libreoffice
+
+postgres_pkgs:
+    - postgresql
+    - libpq-dev
+    - python-psycopg2
+
+unzip: unzip
+
+passenger_pkgs:
+    - apache2-prefork-dev
+    - apache2-mpm-worker
