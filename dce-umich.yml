@@ -36,7 +36,7 @@
     - { role: sufia_dependencies/install }
     - { role: sufia_dependencies/config }
     - { role: RIIIF }
-    - { role: apache-passenger/install }
-    - { role: apache-passenger/config }
+    - { role: webserver/install }
+    - { role: webserver/config }
     - { role: app-config }
     - { role: deploy }
