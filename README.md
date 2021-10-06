@@ -70,7 +70,10 @@ To set up a production-like Vagrant box (for staging, troubleshooting) for your 
 8. sudo service apache2 restart
 
 ## Contributing
-Contributions are welcome in the form of issues (including bug reports, use cases) and pull requests. See [contributing](CONTRIBUTING.md) for more details.
+
+If you're working on a PR for this project, create a feature branch off of `main`. 
+
+This repository follows the [Samvera Community Code of Conduct](https://samvera.atlassian.net/wiki/spaces/samvera/pages/405212316/Code+of+Conduct) and [language recommendations](https://github.com/samvera/maintenance/blob/master/templates/CONTRIBUTING.md#language).  Please ***do not*** create a branch called `master` for this repository or as part of your pull request; the branch will either need to be removed or renamed before it can be considered for inclusion in the code base and history of this repository.
 
 ## Origins
 This Ansible project grew out of a set of playbooks and roles created by Data Curation Experts for the Chemical Heritage Foundation.
